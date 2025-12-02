@@ -12,11 +12,13 @@ Dispatch superpowers:code-reviewer subagent to catch issues before they cascade.
 ## When to Request Review
 
 **Mandatory:**
+
 - After each task in subagent-driven development
 - After completing major feature
 - Before merge to main
 
 **Optional but valuable:**
+
 - When stuck (fresh perspective)
 - Before refactoring (baseline check)
 - After fixing complex bug
@@ -24,6 +26,7 @@ Dispatch superpowers:code-reviewer subagent to catch issues before they cascade.
 ## How to Request
 
 **1. Get git SHAs:**
+
 ```bash
 BASE_SHA=$(git rev-parse HEAD~1)  # or origin/main
 HEAD_SHA=$(git rev-parse HEAD)
@@ -34,6 +37,7 @@ HEAD_SHA=$(git rev-parse HEAD)
 Use Task tool with superpowers:code-reviewer type, fill template at `code-reviewer.md`
 
 **Placeholders:**
+
 - `{WHAT_WAS_IMPLEMENTED}` - What you just built
 - `{PLAN_OR_REQUIREMENTS}` - What it should do
 - `{BASE_SHA}` - Starting commit
@@ -41,10 +45,21 @@ Use Task tool with superpowers:code-reviewer type, fill template at `code-review
 - `{DESCRIPTION}` - Brief summary
 
 **3. Act on feedback:**
+
 - Fix Critical issues immediately
 - Fix Important issues before proceeding
 - Note Minor issues for later
 - Push back if reviewer is wrong (with reasoning)
+
+**4. Cleanup after review - MANDATORY:**
+
+If subagent was used for review, YOU MUST clean up:
+
+1. List background shells: `/bashes`
+2. Kill the code-reviewer subagent's shell
+3. Verify: `/bashes` shows no orphaned processes
+
+Code reviewer subagents leave background shells running. Every time. Clean up immediately after review completes.
 
 ## Example
 
@@ -77,27 +92,41 @@ You: [Fix progress indicators]
 ## Integration with Workflows
 
 **Subagent-Driven Development:**
+
 - Review after EACH task
 - Catch issues before they compound
 - Fix before moving to next task
 
 **Executing Plans:**
+
 - Review after each batch (3 tasks)
 - Get feedback, apply, continue
 
 **Ad-Hoc Development:**
+
 - Review before merge
 - Review when stuck
 
 ## Red Flags
 
 **Never:**
+
 - Skip review because "it's simple"
 - Ignore Critical issues
 - Proceed with unfixed Important issues
 - Argue with valid technical feedback
+- Skip cleanup because "I'll do it later"
+
+**Cleanup rationalizations:**
+
+| Excuse                              | Reality                                             |
+| ----------------------------------- | --------------------------------------------------- |
+| "I'll clean up at end of session"   | You'll forget. Clean up immediately after each use. |
+| "Background processes don't matter" | They consume resources. Poor hygiene compounds.     |
+| "Just one more task first"          | Clean up now. Before proceeding to next task.       |
 
 **If reviewer wrong:**
+
 - Push back with technical reasoning
 - Show code/tests that prove it works
 - Request clarification

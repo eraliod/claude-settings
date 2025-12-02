@@ -21,28 +21,44 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 Before writing detailed implementation tasks, understand the codebase conventions:
 
+0. **Check for design document**: If this plan is being created from a design phase, reference it
+
+   ```bash
+   test -f docs/designs/*-feature-design.md && fd . docs/designs
+   ```
+
+   Read the design document to understand the intended architecture before planning implementation details. Include design doc link in plan header.
+
 1. **Find similar features**: Search for existing implementations similar to what you're building
-2. **Extract patterns**: How are they structured? What conventions do they follow?
+2. **Check decisions**: If `docs/decisions/` exists, review relevant ADRs for architectural context
+   ```bash
+   test -d docs/decisions && ls docs/decisions/*.md
+   ```
+   Read ADRs that relate to the feature being planned.
+3. **Extract patterns**: How are they structured? What conventions do they follow?
    - File organization (where do similar files live?)
    - Naming conventions (how are similar classes/functions named?)
    - Testing patterns (how are similar features tested?)
    - Import patterns (how are dependencies imported?)
-3. **Document conventions**: Capture patterns in the plan document
-4. **Design for consistency**: Follow discovered patterns unless you have strong reason to diverge
+4. **Document conventions**: Capture patterns in the plan document
+5. **Design for consistency**: Follow discovered patterns unless you have strong reason to diverge
 
 **Example pattern survey in plan:**
+
 ```markdown
 ## Existing Patterns Survey
+
 - Similar feature: User authentication (src/auth/)
 - File pattern: {feature}/handlers.py, {feature}/models.py, {feature}/tests/
 - Naming: Use FooHandler classes, handle_foo() functions
 - Testing: Each handler has corresponding test_handlers.py with pytest fixtures
-→ Our feature should follow same structure
+  → Our feature should follow same structure
 ```
 
 ## Bite-Sized Task Granularity
 
 **Each step is one action (2-5 minutes):**
+
 - "Write the failing test" - step
 - "Run it to make sure it fails" - step
 - "Implement the minimal code to make the test pass" - step
@@ -60,6 +76,8 @@ Before writing detailed implementation tasks, understand the codebase convention
 
 **Goal:** [One sentence describing what this builds]
 
+**Design:** [../designs/YYYY-MM-DD-feature-design.md](../designs/YYYY-MM-DD-feature-design.md) _(if exists)_
+
 **Architecture:** [2-3 sentences about approach]
 
 **Tech Stack:** [Key technologies/libraries]
@@ -69,10 +87,11 @@ Before writing detailed implementation tasks, understand the codebase convention
 
 ## Task Structure
 
-```markdown
+````markdown
 ### Task N: [Component Name]
 
 **Files:**
+
 - Create: `exact/path/to/file.py`
 - Modify: `exact/path/to/existing.py:123-145`
 - Test: `tests/exact/path/to/test.py`
@@ -84,6 +103,7 @@ def test_specific_behavior():
     result = function(input)
     assert result == expected
 ```
+````
 
 **Step 2: Run test to verify it fails**
 
@@ -108,6 +128,7 @@ Expected: PASS
 git add tests/path/test.py src/path/file.py
 git commit -m "feat: add specific feature"
 ```
+
 ```
 
 ## Remember
@@ -137,3 +158,4 @@ After saving the plan, offer execution choice:
 **If Parallel Session chosen:**
 - Guide them to open new session in worktree
 - **REQUIRED SUB-SKILL:** New session uses superpowers:executing-plans
+```

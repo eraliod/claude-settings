@@ -1,8 +1,6 @@
 ---
 name: Inversion Exercise
-description: Flip core assumptions to reveal hidden constraints and alternative approaches - "what if the opposite were true?"
-when_to_use: when stuck on unquestioned assumptions or feeling forced into "the only way" to do something
-version: 1.1.0
+description: Use when stuck on unquestioned assumptions or feeling forced into "the only way" to do something - flips core assumptions to reveal hidden constraints and alternative approaches by asking "what if the opposite were true?"
 ---
 
 # Inversion Exercise
@@ -15,13 +13,13 @@ Flip every assumption and see what still works. Sometimes the opposite reveals t
 
 ## Quick Reference
 
-| Normal Assumption | Inverted | What It Reveals |
-|-------------------|----------|-----------------|
-| Cache to reduce latency | Add latency to enable caching | Debouncing patterns |
-| Pull data when needed | Push data before needed | Prefetching, eager loading |
-| Handle errors when occur | Make errors impossible | Type systems, contracts |
-| Build features users want | Remove features users don't need | Simplicity >> addition |
-| Optimize for common case | Optimize for worst case | Resilience patterns |
+| Normal Assumption         | Inverted                         | What It Reveals            |
+| ------------------------- | -------------------------------- | -------------------------- |
+| Cache to reduce latency   | Add latency to enable caching    | Debouncing patterns        |
+| Pull data when needed     | Push data before needed          | Prefetching, eager loading |
+| Handle errors when occur  | Make errors impossible           | Type systems, contracts    |
+| Build features users want | Remove features users don't need | Simplicity >> addition     |
+| Optimize for common case  | Optimize for worst case          | Resilience patterns        |
 
 ## Process
 
@@ -37,6 +35,7 @@ Flip every assumption and see what still works. Sometimes the opposite reveals t
 **Normal approach:** Make everything faster (caching, optimization, CDN)
 
 **Inverted:** Make things intentionally slower in some places
+
 - Debounce search (add latency → enable better results)
 - Rate limit requests (add friction → prevent abuse)
 - Lazy load content (delay → reduce initial load)

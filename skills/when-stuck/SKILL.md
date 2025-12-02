@@ -1,8 +1,6 @@
 ---
-name: When Stuck - Problem-Solving Dispatch
-description: Dispatch to the right problem-solving technique based on how you're stuck
-when_to_use: when stuck and unsure which problem-solving technique to apply for your specific type of stuck-ness
-version: 1.1.0
+name: When Stuck
+description: Use when stuck and unsure which problem-solving technique to apply for your specific type of stuck-ness - dispatches to the right problem-solving skill based on symptoms (complexity spiraling, need innovation, recurring patterns, forced assumptions, scale uncertainty, or bugs)
 ---
 
 # When Stuck - Problem-Solving Dispatch
@@ -54,18 +52,35 @@ digraph stuck_dispatch {
 
 ## Stuck-Type → Technique
 
-| How You're Stuck | Use This Skill |
-|------------------|----------------|
-| **Complexity spiraling** - Same thing 5+ ways, growing special cases | skills/simplification-cascades |
-| **Need innovation** - Conventional solutions inadequate, can't find fitting approach | skills/collision-zone-thinking |
-| **Recurring patterns** - Same issue different places, reinventing wheels | skills/meta-pattern-recognition |
-| **Forced by assumptions** - "Must be done this way", can't question premise | skills/inversion-exercise |
-| **Scale uncertainty** - Will it work in production? Edge cases unclear? | skills/scale-game |
-| **Code broken** - Wrong behavior, test failing, unexpected output | skills/systematic-debugging |
-| **Multiple independent problems** - Can parallelize investigation | skills/dispatching-parallel-agents |
-| **Root cause unknown** - Symptom clear, cause hidden | skills/root-cause-tracing |
+| How You're Stuck                                                                     | Use This Skill                     |
+| ------------------------------------------------------------------------------------ | ---------------------------------- |
+| **Complexity spiraling** - Same thing 5+ ways, growing special cases                 | skills/simplification-cascades     |
+| **Need innovation** - Conventional solutions inadequate, can't find fitting approach | skills/collision-zone-thinking     |
+| **Recurring patterns** - Same issue different places, reinventing wheels             | skills/meta-pattern-recognition    |
+| **Forced by assumptions** - "Must be done this way", can't question premise          | skills/inversion-exercise          |
+| **Scale uncertainty** - Will it work in production? Edge cases unclear?              | skills/scale-game                  |
+| **Code broken** - Wrong behavior, test failing, unexpected output                    | skills/systematic-debugging        |
+| **Multiple independent problems** - Can parallelize investigation                    | skills/dispatching-parallel-agents |
+| **Root cause unknown** - Symptom clear, cause hidden                                 | skills/root-cause-tracing          |
 
 ## Process
+
+0. **Check Known Issues** (if applicable)
+
+   Before dispatching to problem-solving techniques, check if this problem has been solved before:
+
+   ```bash
+   test -f docs/discoveries/DISCOVERIES.md && echo "Check DISCOVERIES file"
+   ```
+
+   **If `docs/discoveries/DISCOVERIES.md` exists:**
+   - Read through discoveries for similar problems
+   - Search for keywords related to your stuck-ness
+   - May find solution without full investigation
+
+   **Otherwise:**
+   - Try `mem search semantic "stuck on [describe problem]"`
+   - May find past solutions from your personal knowledge
 
 1. **Identify stuck-type** - What symptom matches above?
 2. **Load that skill** - Read the specific technique

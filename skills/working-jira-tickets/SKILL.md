@@ -11,6 +11,16 @@ Create well-structured JIRA tickets with clear requirements, specific success cr
 
 **Core principle:** Specific, measurable Definition of Done for single-sprint scope.
 
+## CRITICAL: Required First Step
+
+**BEFORE making ANY JIRA API calls, you MUST:**
+
+1. Read the jira-api-reference.md file in the same directory as this skill
+2. Use the API patterns and curl commands documented in that file
+3. Follow the authentication and payload formats exactly as shown
+
+**Failure to read jira-api-reference.md first will result in failed API calls.**
+
 ## When to Use
 
 - Creating new stories or tasks
@@ -21,10 +31,45 @@ Create well-structured JIRA tickets with clear requirements, specific success cr
 
 ## Ticket Type Selection
 
-| Type | Use When | Examples |
-|------|----------|----------|
-| **Story** | Code changes requiring testing/deployment | API changes, UI features, migrations |
-| **Task** | No code deployment needed | Documentation, discovery, data analysis |
+| Type      | Use When                                  | Examples                                |
+| --------- | ----------------------------------------- | --------------------------------------- |
+| **Story** | Code changes requiring testing/deployment | API changes, UI features, migrations    |
+| **Task**  | No code deployment needed                 | Documentation, discovery, data analysis |
+
+## Discovery Tickets (Special Case of Task)
+
+**Purpose:** Gather information to enable writing a refined Story later. Discovery tickets are intentionally less precise - their goal is exploration, not delivery.
+
+### Discovery Ticket Structure
+
+1. **Title** - Same format as Stories: `[Verb] + [Object] + [Context]`
+2. **Description** - What to investigate and why (1-3 sentences)
+3. **Definition of Done** - What information/decision is needed
+4. **NO Implementation Details section** - You don't know enough yet; that comes later
+
+**After discovery:** Create follow-up Story with refined Description + Implementation Details + precise DoD
+
+### Discovery Example
+
+```
+Title: Investigate Email Notification Provider Options
+
+Description: Research email service providers to replace current
+unreliable in-house solution. Need to support 10K+ daily emails
+with delivery tracking.
+
+Definition of Done:
+* Compared 3-5 providers on cost, features, reliability
+* Documented integration complexity for top 2 options
+* Recommendation with rationale in ticket comment
+* Rough effort estimate for migration
+* Ready to write implementation story
+
+Type: Task
+Priority: Medium
+```
+
+**Key difference:** DoD focuses on decisions/learnings rather than working code. Less precision is expected and appropriate for discovery work.
 
 ## Story Structure (3 Required Sections)
 
@@ -57,6 +102,7 @@ errors at startup. Currently getting silent failures on typos.
 ```
 
 **DoD characteristics:**
+
 - Specific and measurable
 - Outcome-focused
 - Includes code + tests + docs
@@ -93,31 +139,35 @@ errors at startup. Currently getting silent failures on typos.
 **Right-sized:** 2-5 days, single responsibility, demo-able, fits one sprint
 
 **Too large signs:**
+
 - Multiple "and"s in description
 - DoD has 15+ items
 - Spans multiple layers
 
 **Split strategies:**
+
 1. By functionality (Registration → Profile → Deletion)
 2. By layer (API → UI → Caching)
 3. By scenario (Single upload → Bulk → Progress)
 
 ## Default Settings
 
-| Field | Default | When to Change |
-|-------|---------|----------------|
-| **Priority** | Medium | Critical: outage/security; High: blocking work |
-| **Sizing** | Empty | Fill during sprint refinement, not creation |
-| **Parent** | Fill if known | Link to epic for context |
+| Field        | Default       | When to Change                                 |
+| ------------ | ------------- | ---------------------------------------------- |
+| **Priority** | Medium        | Critical: outage/security; High: blocking work |
+| **Sizing**   | Empty         | Fill during sprint refinement, not creation    |
+| **Parent**   | Fill if known | Link to epic for context                       |
 
 ## Linking Related Work
 
 **When to link:**
+
 - Splitting one story into multiple stories
 - Creating multiple related tickets
 - Work has dependencies
 
 **Link types:**
+
 - **Relates**: General relationship, use when unsure (default)
 - **Blocks**: Hierarchical dependency (this ticket blocks another / is blocked by another)
 - **Duplicate**: Duplicate tickets
@@ -130,6 +180,7 @@ errors at startup. Currently getting silent failures on typos.
 **When user starts work:** Update status using transitions API (NOT comments)
 
 **Process:**
+
 1. Get available transitions for the issue to find the "In Progress" transition ID
 2. Execute the transition to update status
 
@@ -138,6 +189,7 @@ errors at startup. Currently getting silent failures on typos.
 ## Progress Updates via Comments
 
 **When to add comments:**
+
 - Completing a milestone or checkpoint with substantial progress
 - Encountering blockers or changes in approach
 - Linking to external work (PRs, docs, branches) with context
@@ -159,6 +211,7 @@ Working on it. Making progress. Will update later.
 ```
 
 **Guidelines:**
+
 - Only add comments when there's substance to share
 - Include links to PRs, commits, files, documentation
 - List specific accomplishments or next steps
@@ -178,12 +231,12 @@ Working on it. Making progress. Will update later.
 
 ## Common Mistakes
 
-| Mistake | Fix |
-|---------|-----|
-| **Vague** ("Fix login issues") | Specific ("Fix login timeout for SSO users >8KB SAML") |
-| **Implementation as DoD** ("Create UserService class") | Outcomes ("Passwords hashed with bcrypt") |
-| **Scope creep** ("Add auth and authorization and...") | Split into multiple stories |
-| **Missing context** ("Switch to file notification mode") | Why ("...to reduce CPU by 80%") |
+| Mistake                                                  | Fix                                                    |
+| -------------------------------------------------------- | ------------------------------------------------------ |
+| **Vague** ("Fix login issues")                           | Specific ("Fix login timeout for SSO users >8KB SAML") |
+| **Implementation as DoD** ("Create UserService class")   | Outcomes ("Passwords hashed with bcrypt")              |
+| **Scope creep** ("Add auth and authorization and...")    | Split into multiple stories                            |
+| **Missing context** ("Switch to file notification mode") | Why ("...to reduce CPU by 80%")                        |
 
 ## Complete Example
 
@@ -226,6 +279,7 @@ Connected: Relates to DPLAT-801, Blocked by DPLAT-799
 For all JIRA API interactions using curl commands, see [jira-api-reference.md](jira-api-reference.md).
 
 **Available operations:**
+
 - [Authentication setup and testing](jira-api-reference.md#authentication)
 - [Create issues (Stories, Tasks)](jira-api-reference.md#create-issue)
 - [Link related issues](jira-api-reference.md#link-issues)

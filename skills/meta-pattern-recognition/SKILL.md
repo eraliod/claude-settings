@@ -1,8 +1,6 @@
 ---
 name: Meta-Pattern Recognition
-description: Spot patterns appearing in 3+ domains to find universal principles
-when_to_use: when noticing the same pattern across 3+ different domains or experiencing déjà vu in problem-solving
-version: 1.1.0
+description: Use when noticing the same pattern across 3+ different domains or experiencing déjà vu in problem-solving - identifies patterns appearing in multiple domains to extract universal principles that apply broadly
 ---
 
 # Meta-Pattern Recognition
@@ -15,12 +13,12 @@ When the same pattern appears in 3+ domains, it's probably a universal principle
 
 ## Quick Reference
 
-| Pattern Appears In | Abstract Form | Where Else? |
-|-------------------|---------------|-------------|
-| CPU/DB/HTTP/DNS caching | Store frequently-accessed data closer | LLM prompt caching, CDN |
-| Layering (network/storage/compute) | Separate concerns into abstraction levels | Architecture, organization |
-| Queuing (message/task/request) | Decouple producer from consumer with buffer | Event systems, async processing |
-| Pooling (connection/thread/object) | Reuse expensive resources | Memory management, resource governance |
+| Pattern Appears In                 | Abstract Form                               | Where Else?                            |
+| ---------------------------------- | ------------------------------------------- | -------------------------------------- |
+| CPU/DB/HTTP/DNS caching            | Store frequently-accessed data closer       | LLM prompt caching, CDN                |
+| Layering (network/storage/compute) | Separate concerns into abstraction levels   | Architecture, organization             |
+| Queuing (message/task/request)     | Decouple producer from consumer with buffer | Event systems, async processing        |
+| Pooling (connection/thread/object) | Reuse expensive resources                   | Memory management, resource governance |
 
 ## Process
 
